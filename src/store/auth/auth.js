@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify';
 
 export const auth = {
-  namespace: true,
+  namespaced: true,
   state: {
     user: null,
   },
@@ -10,19 +10,21 @@ export const auth = {
       state.user = payload;
     },
   },
-  acions: {
+  actions: {
     async logout({ commit }) {
       commit('setUser', null);
       return await Auth.signOut();
     },
 
-    async login({ commit }, { userName, password }) {
+    async login({ commit }, { username, password }) {
+      console.log(username);
       try {
         await Auth.signIn({
-          userName,
+          username,
           password,
         });
         const userInfo = await Auth.currentUserInfo();
+        console.log(userInfo, 'userInfo');
         commit('setUser', userInfo);
         return Promise.resolve('Success');
       } catch (error) {
@@ -31,9 +33,9 @@ export const auth = {
       }
     },
 
-    async confirmSignUp(_, { userName, code }) {
+    async confirmSignUp(_, { username, code }) {
       try {
-        await Auth.confirmSignUp(userName, code);
+        await Auth.confirmSignUp(username, code);
         return Promise.resolve();
       } catch (error) {
         console.log(error);
@@ -41,10 +43,10 @@ export const auth = {
       }
     },
 
-    async signUp(_, { userName, password, email }) {
+    async signUp(_, { username, password, email }) {
       try {
         await Auth.signUp({
-          userName,
+          username,
           password,
           attributes: {
             email,
