@@ -17,19 +17,20 @@ export const auth = {
     },
 
     async login({ commit }, { username, password }) {
-      console.log(username);
       try {
         await Auth.signIn({
           username,
           password,
         });
+
         const userInfo = await Auth.currentUserInfo();
-        console.log(userInfo, 'userInfo');
+
         commit('setUser', userInfo);
+
         return Promise.resolve('Success');
       } catch (error) {
         console.log(error);
-        return Promise.reject('reject');
+        return Promise.reject(error);
       }
     },
 
@@ -39,7 +40,7 @@ export const auth = {
         return Promise.resolve();
       } catch (error) {
         console.log(error);
-        return Promise.reject('reject');
+        return Promise.reject(error);
       }
     },
 
@@ -55,7 +56,7 @@ export const auth = {
         return Promise.resolve();
       } catch (error) {
         console.log(error);
-        return Promise.reject();
+        return Promise.reject(error);
       }
     },
 

@@ -1,9 +1,21 @@
 <template>
-  <div></div>
+  <div class="p-10">
+    <ul class="flex justify-end"></ul>
+  </div>
 </template>
 
 <script>
-  export default {};
+  import { mapGetters } from 'vuex';
+
+  export default {
+    name: 'Nav',
+    methods: {
+      async logout() {},
+    },
+    computed: {
+      ...mapGetters({}),
+    },
+  };
 </script>
 
 <style scoped></style>

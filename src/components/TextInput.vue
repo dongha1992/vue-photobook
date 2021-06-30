@@ -7,7 +7,7 @@
     >
     <input
       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      type="text"
+      :type="type"
       :id="modelValue"
       :for="modelValue"
       :value="modelValue"
@@ -22,6 +22,7 @@
     props: {
       name: String,
       modelValue: String,
+      type: String,
     },
     methods: {
       updateValue(modelValue) {
