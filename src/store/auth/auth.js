@@ -16,8 +16,7 @@ export const auth = {
       return await Auth.signOut();
     },
 
-    // eslint-disable-next-line no-unused-vars
-    async login({ commit, dispatch }, { userName, password }) {
+    async login({ commit }, { userName, password }) {
       try {
         await Auth.signIn({
           userName,
