@@ -1,7 +1,13 @@
 <template>
-  <div>home</div>
+  <Login />
 </template>
 
 <script>
-  export default {};
+  import Login from '@/components/Login.vue';
+  export default {
+    name: 'Home',
+    components: {
+      Login,
+    },
+  };
 </script>

@@ -22,11 +22,14 @@
       <TextInput name="코드" v-model="code" type="text" />
       <button class="btn-blue" @click="confirmSignUp">Confirm Code</button>
     </div>
+    <Loading v-if="isLoading" />
   </div>
 </template>
 
 <script>
   import TextInput from '@/components/TextInput';
+  import Loading from '@/components/Loading';
+
   export default {
     name: 'SignUpPage',
     data: () => ({
@@ -36,14 +39,15 @@
       error: '',
       confirmPassword: false,
       code: '',
+      isLoading: false,
     }),
-    components: { TextInput },
+    components: { TextInput, Loading },
     methods: {
       async signUp() {
+        this.isLoading = true;
         if (!this.email || !this.password) {
           return;
         }
-
         try {
           await this.$store.dispatch('auth/signUp', {
             username: this.username,
@@ -56,10 +60,12 @@
           this.error = error;
           console.log(this.error);
         }
+        this.isLoading = false;
       },
 
       async confirmSignUp() {
-        if (!this.username || !this.name) return;
+        this.isLoading = true;
+        if (!this.username || !this.email) return;
 
         try {
           const { username, password, code } = this;
@@ -76,6 +82,7 @@
           console.log(error);
           this.error = error;
         }
+        this.isLoading = false;
       },
     },
   };

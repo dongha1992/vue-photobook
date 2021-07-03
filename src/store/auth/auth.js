@@ -35,6 +35,7 @@ export const auth = {
     },
 
     async confirmSignUp(_, { username, code }) {
+      console.log(username, code)
       try {
         await Auth.confirmSignUp(username, code);
         return Promise.resolve();
