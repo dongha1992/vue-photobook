@@ -11,11 +11,11 @@
   export default {
     name: 'App',
     mounted() {
-      this.authAction();
+      this.authActions();
     },
     components: { Nav },
     methods: {
-      ...mapActions('auth', ['authAction']),
+      ...mapActions('auth', ['authActions']),
     },
   };
 </script>
